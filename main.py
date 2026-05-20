@@ -19,7 +19,8 @@ def health_check():
 async def calculate(data: YieldRequest):
     try:
         # 1. Separate the equation into Reactants and Products
-        reac_str, prod_str = data.equation.split("->")
+        cleaned_eq = data.equation.replace("-&gt;", "->").replace("==", "->")
+        reac_str, prod_str = cleaned_eq.split("->")
         reactants = [r.strip() for r in reac_str.split("+")]
         products = [p.strip() for p in prod_str.split("+")]
 
